@@ -6,10 +6,8 @@ local whitelist = {
     ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true
 }
 
--- Get the player's UserId
 local playerId = tostring(game.Players.LocalPlayer.UserId)
 
--- Check if any whitelist key contains the player's UserId
 local isWhitelisted = false
 for key, _ in pairs(whitelist) do
     if playerId:find(key) then
@@ -18,7 +16,6 @@ for key, _ in pairs(whitelist) do
     end
 end
 
--- If the player is not whitelisted, kick them
 if not isWhitelisted then
     game.Players.LocalPlayer:Kick("Not whitelisted")
 end
