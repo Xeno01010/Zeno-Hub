@@ -6,11 +6,11 @@ local whitelist = {
     ["ZENO_HUB|151|153|151|160|146|171|155|157|160|156"] = true
 }
 
--- Get the player's name
-local playerName = game.Players.LocalPlayer.Name
+-- Get the player's ID
+local playerId = game.Players.LocalPlayer.UserId
 
--- Check if the player's name is in the whitelist
-local isWhitelisted = whitelist[playerName] ~= nil
+-- Check if the player's ID is in the whitelist
+local isWhitelisted = whitelist["ZENO_HUB|" .. playerId] == true
 
 -- If the player is not whitelisted, kick them
 if not isWhitelisted then
