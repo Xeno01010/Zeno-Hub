@@ -46,6 +46,5 @@ end) or "\\"
 for wPly, _ in pairs(whitelist) do
     if Input == wPly then
         -- LOAD SCRIPT HERE
-        return
     end
 end
