@@ -6,15 +6,13 @@ local whitelist = {
     ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true
 }
 
--- Check if a key is in the whitelist
-local function isWhitelisted(key)
-    return whitelist[key] ~= nil
-end
+-- Whitelisted key to check
+local whitelistedKey = "ZENO_HUB|149|154|148|160|153|172|157|154|155|149"
 
--- Example usage:
-local keyToCheck = "ZENO_HUB|149|154|148|160|153|172|157|154|155|149"
-if isWhitelisted(keyToCheck) then
-    print("Key is whitelisted")
+-- Check if the provided key is in the whitelist
+if whitelist[whitelistedKey] then
+    print("Access granted for key: " .. whitelistedKey)
 else
-    print("Key is not whitelisted")
+    print("Access denied for key: " .. whitelistedKey)
+    game.Players.LocalPlayer:Kick("Access denied (not whitelisted key: " .. whitelistedKey .. ")")
 end
