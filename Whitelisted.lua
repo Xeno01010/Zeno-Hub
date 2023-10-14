@@ -7,12 +7,6 @@ local whitelist = {
     ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true
 }
 
--- Print the keys in the whitelist for debugging
-print("Keys in whitelist:")
-for key, _ in pairs(whitelist) do
-    print(key)
-end
-
 -- Check if the player's key is in the whitelist
 local function isWhitelisted(key)
     return whitelist[key] ~= nil
@@ -20,6 +14,8 @@ end
 
 -- Example key to check
 local keyToCheck = "ZENO_HUB|149|154|148|160|153|172|157|154|155|149"
+
+print("Checking key:", keyToCheck)
 
 if isWhitelisted(keyToCheck) then
     print("Access granted for key: " .. keyToCheck)
