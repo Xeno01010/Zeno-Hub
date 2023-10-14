@@ -1,3 +1,10 @@
+ocal whitelist = {
+    ["ZENO_HUB|157|155|157|153|147|167|162|153|156"] = true,
+    ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true,
+    ["ZENO_HUB|101|106|100|112|105|124|109|106|107|101"] = true,
+    ["ZENO_HUB|151|153|151|160|146|171|155|157|160|156"] = true,
+    ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true
+}
 local Players = game:GetService("Players")
 
 -- Function to get the UserId
@@ -17,7 +24,7 @@ local function GetUserId(Value)
     end
 end
 
-local lp = game.Players.LocalPlayer
+local lp = game.Players.LocalPlayer 
 
 -- Replace "YourUserId" with your actual UserId
 local YourUserId = 1107892621
@@ -35,8 +42,10 @@ local Input = WaterMark .. result:gsub(".", (function(bb)
     return "\\" .. string.byte(bb)
 end)) or "\\"
 
+-- Replace with your whitelist of watermarks
 local whitelist = {
     -- Add other whitelisted watermarks here
+    "ZENO_HUB|...", -- Add your whitelisted watermark here
 }
 
 -- Check if the generated watermark is in the whitelist
