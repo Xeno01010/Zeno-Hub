@@ -7,7 +7,7 @@ local whitelist = {
 
 -- Check if a key is in the whitelist
 local function isWhitelisted(key)
-    return whitelist[key]
+    return whitelist[key] ~= nil
 end
 
 -- Example usage:
