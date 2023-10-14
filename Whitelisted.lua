@@ -1,4 +1,3 @@
--- Load the whitelist
 local whitelist = {
     ["ZENO_HUB|157|155|157|153|147|167|162|153|156"] = true,
     ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true,
@@ -7,11 +6,17 @@ local whitelist = {
     ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true
 }
 
--- Specify the UserId you want to check
-local userIdToCheck = "1107892621"  -- Replace with the UserId you want to check
+-- Get the player's UserId
+local playerId = tostring(game.Players.LocalPlayer.UserId)
 
--- Check if the specified UserId is in the whitelist
-local isWhitelisted = whitelist[userIdToCheck] or false
+-- Check if any whitelist key contains the player's UserId
+local isWhitelisted = false
+for key, _ in pairs(whitelist) do
+    if playerId:find(key) then
+        isWhitelisted = true
+        break
+    end
+end
 
 -- If the player is not whitelisted, kick them
 if not isWhitelisted then
