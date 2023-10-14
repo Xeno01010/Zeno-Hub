@@ -21,4 +21,6 @@ end
 -- If the player is not whitelisted, kick them
 if not isWhitelisted then
     game.Players.LocalPlayer:Kick("Not whitelisted")
+else
+    print("Whitelisted user")
 end
