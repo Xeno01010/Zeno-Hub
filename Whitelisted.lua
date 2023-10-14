@@ -10,14 +10,8 @@ local whitelist = {
 -- Get the player's UserId
 local playerId = tostring(game.Players.LocalPlayer.UserId)
 
--- Check if any whitelist key contains the player's UserId
-local isWhitelisted = false
-for key, _ in pairs(whitelist) do
-    if playerId:find(key) then
-        isWhitelisted = true
-        break
-    end
-end
+-- Check if the player's UserId is in the whitelist
+local isWhitelisted = whitelist[playerId]
 
 -- If the player is not whitelisted, kick them
 if not isWhitelisted then
