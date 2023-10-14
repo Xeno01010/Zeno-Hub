@@ -6,11 +6,16 @@ local whitelist = {
     ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true
 }
 
+-- Function to check if a key is in the whitelist
+local function isWhitelisted(key)
+    return whitelist[key] ~= nil
+end
+
 -- Whitelisted key to check
 local whitelistedKey = "ZENO_HUB|149|154|148|160|153|172|157|154|155|149"
 
 -- Check if the provided key is in the whitelist
-if whitelist[whitelistedKey] then
+if isWhitelisted(whitelistedKey) then
     print("Access granted for key: " .. whitelistedKey)
 else
     print("Access denied for key: " .. whitelistedKey)
