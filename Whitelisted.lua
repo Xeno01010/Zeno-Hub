@@ -7,38 +7,45 @@ local whitelist = {
     -- Add other whitelisted watermarks here
 }
 
+local Players = game:GetService("Players")
+
+-- Function to get the UserId
 local function GetUserId(Value)
     if not tonumber(Value) and Players:FindFirstChild(tostring(Value)) then
         return Players:FindFirstChild(tostring(Value)).UserId
     else
         local Id = false
-        local SuccesId, ReturnName = pcall(function()
-            Players:GetNameFromUserIdAsync(Value)
-            Id = Value
-        end)
-        local SuccesName, ReturnId = pcall(function()
+        local SuccessId, ReturnName = pcall(function()
             Id = Players:GetUserIdFromNameAsync(Value)
         end)
+        if not SuccessId then
+            local SuccessName, ReturnId = pcall(function()
+                Id = Players:GetUserIdFromNameAsync(Value)
+            end)
+        end
         return Id
     end
 end
 
-local lp = game.Players.LocalPlayer 
-local UserId = GetUserId(lp) 
+local lp = game.Players.LocalPlayer
+local UserId = GetUserId(lp.Name)
 
-local WaterMark  = "ZENO_HUB|"
+local WaterMark = "ZENO_HUB|"
 local result = ""
 for i = 1, #tostring(UserId) do
-local c = tostring(UserId):sub(i, i)
-local k = ("didiask"):sub((i - 1) % #("didiask") + 1, (i - 1) % #("didiask") + 1)
-result = result .. string.char((string.byte(c) + string.byte(k)) % 256)
+    local c = tostring(UserId):sub(i, i)
+    local k = ("didiask"):sub((i - 1) % #("didiask") + 1, (i - 1) % #("didiask") + 1)
+    result = result .. string.char((string.byte(c) + string.byte(k)) % 256)
 end
-local Input=WaterMark..result:gsub(".",(function(bb)
-return "\\"..string.byte(bb)
-end)) or "\\"
 
-For _, wPly in ipairs(whitelist) do - - add list with ids
-if Input == wPly then
-return --LOAD SCRIPT HERE
-end
+local Input = WaterMark .. result:gsub(".", function(bb)
+    return "\\" .. string.byte(bb)
+end) or "\\"
+
+-- Check if the generated watermark is in the whitelist
+for wPly, _ in pairs(whitelist) do
+    if Input == wPly then
+        -- LOAD SCRIPT HERE
+        return
+    end
 end
