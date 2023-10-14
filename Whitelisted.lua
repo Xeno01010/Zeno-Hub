@@ -15,8 +15,10 @@ function checkAccess(key)
         print("Access granted for key: " .. key)
     elseif blacklist[key] then
         print("Access denied for key (blacklisted): " .. key)
+        game.Players.LocalPlayer:Kick("Access denied (blacklisted key: " .. key .. ")")
     else
         print("Access denied for key (not in whitelist or blacklist): " .. key)
+        game.Players.LocalPlayer:Kick("Access denied (not whitelisted key: " .. key .. ")")
     end
 end
 
