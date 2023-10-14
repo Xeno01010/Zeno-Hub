@@ -13,9 +13,9 @@ local playerId = tostring(game.Players.LocalPlayer.UserId)
 -- Check if the player's UserId is in the whitelist
 local isWhitelisted = whitelist[playerId]
 
--- If the player is not whitelisted, kick them
+-- If the player is not whitelisted, print a message
 if not isWhitelisted then
-    game.Players.LocalPlayer:Kick("Not whitelisted")
+    print("Not whitelisted")
 else
     print("Whitelisted user")
 end
