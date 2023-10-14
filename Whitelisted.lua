@@ -1,4 +1,4 @@
--- Whitelist
+-- Define the whitelist
 local whitelist = {
     ["ZENO_HUB|157|155|157|153|147|167|162|153|156"] = true,
     ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true,
@@ -7,23 +7,15 @@ local whitelist = {
     ["ZENO_HUB|149|154|148|160|153|172|157|154|155|149"] = true
 }
 
--- Print the keys in the whitelist for debugging
-print("Keys in whitelist:")
-for key, _ in pairs(whitelist) do
-    print(key)
-end
+-- Get the player's UserId
+local playerId = game.Players.LocalPlayer.UserId
 
--- Check if the player's key is in the whitelist
-local function isWhitelisted(key)
-    return whitelist[key] ~= nil
-end
+-- Check if the player's UserId is whitelisted
+local isWhitelisted = whitelist["ZENO_HUB|" .. playerId]
 
--- Example key to check
-local keyToCheck = "ZENO_HUB|149|154|148|160|153|172|157|154|155|149"
-
-if isWhitelisted(keyToCheck) then
-    print("Access granted for key: " .. keyToCheck)
+-- If the player is not whitelisted, kick them
+if not isWhitelisted then
+    game.Players.LocalPlayer:Kick("Not whitelisted")
 else
-    print("Access denied for key: " .. keyToCheck)
-    game.Players.LocalPlayer:Kick("Access denied (not whitelisted key: " .. keyToCheck .. ")")
+    print("Access granted for UserId: " .. playerId)
 end
