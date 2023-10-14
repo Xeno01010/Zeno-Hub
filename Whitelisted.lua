@@ -11,4 +11,6 @@ if whitelist[keyToCheck] then
     print("Access granted for key: " .. keyToCheck)
 else
     print("Access denied for key: " .. keyToCheck)
+    -- Kick the player
+    game.Players.LocalPlayer:Kick("Access denied for key: " .. keyToCheck)
 end
