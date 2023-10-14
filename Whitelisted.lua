@@ -8,7 +8,7 @@ local whitelist = {
 }
 
 -- Specify the UserId you want to check
-local userIdToCheck = "1234567890"  -- Replace with the UserId you want to check
+local userIdToCheck = "1107892621"  -- Replace with the UserId you want to check
 
 -- Check if the specified UserId is in the whitelist
 local isWhitelisted = whitelist[userIdToCheck] or false
