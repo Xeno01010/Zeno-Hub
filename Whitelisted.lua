@@ -10,27 +10,30 @@ local whitelist = {
 local Players = game:GetService("Players")
 local lp = game.Players.LocalPlayer
 
--- Function to get the watermark associated with the UserId
-local function GetWatermarkForUserId(UserId)
+-- Function to generate watermark based on the UserId
+local function GenerateWatermark(UserId)
     local WaterMark = "ZENO_HUB|"
     local result = ""
+
+    -- Generate the watermark based on UserId
     for i = 1, #tostring(UserId) do
         local c = tostring(UserId):sub(i, i)
         local k = ("didiask"):sub((i - 1) % #("didiask") + 1, (i - 1) % #("didiask") + 1)
         result = result .. string.char((string.byte(c) + string.byte(k)) % 256)
     end
+
     return WaterMark .. result:gsub(".", function(bb)
         return "\\" .. string.byte(bb)
     end) or "\\"
 end
 
 -- Get the watermark for the current user
-local watermarkForCurrentUser = GetWatermarkForUserId(lp.UserId)
+local watermarkForCurrentUser = GenerateWatermark(lp.UserId)
 
 -- Check if the generated watermark is in the whitelist
 local isWhitelisted = whitelist[watermarkForCurrentUser]
 
--- If the player is whitelisted, continue; otherwise, kick them
+-- If the player is whitelisted, allow access; otherwise, kick them
 if isWhitelisted then
     print("Access granted for player with UserId: " .. lp.UserId)
 else
