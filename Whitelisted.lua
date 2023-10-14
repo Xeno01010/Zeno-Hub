@@ -15,7 +15,7 @@ local lp = game.Players.LocalPlayer
 local function GetWatermarkForUserId(UserId)
     -- Logic to determine watermark based on UserId (replace with your logic)
     -- For this example, we'll just concatenate a default watermark with the UserId
-    return "ZENO_HUB|" .. UserId
+    return "ZENO_HUB|101|106|100|112|105|124|109|106|107|101|" .. UserId
 end
 
 -- Get the watermark for the current user
