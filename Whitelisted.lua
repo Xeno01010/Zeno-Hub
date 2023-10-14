@@ -9,48 +9,24 @@ local whitelist = {
 }
 
 local Players = game:GetService("Players")
+local lp = game.Players.LocalPlayer
 
--- Function to get the UserId
-local function GetUserId(Value)
-    if not tonumber(Value) and Players:FindFirstChild(tostring(Value)) then
-        return Players:FindFirstChild(tostring(Value)).UserId
-    else
-        local Id = false
-        local SuccessId, ReturnName = pcall(function()
-            Players:GetNameFromUserIdAsync(Value)
-            Id = Value
-        end)
-        local SuccessName, ReturnId = pcall(function()
-            Id = Players:GetUserIdFromNameAsync(Value)
-        end)
-        return Id
-    end
+-- Function to get the watermark associated with the UserId
+local function GetWatermarkForUserId(UserId)
+    -- Logic to determine watermark based on UserId (replace with your logic)
+    -- For this example, we'll just concatenate a default watermark with the UserId
+    return "ZENO_HUB|" .. UserId
 end
 
-local lp = game.Players.LocalPlayer 
-
--- Replace "YourUserId" with your actual UserId
-local YourUserId = 1107892621
-
-local UserId = YourUserId
-
-local WaterMark = "ZENO_HUB|"
-local result = ""
-for i = 1, #tostring(UserId) do
-    local c = tostring(UserId):sub(i, i)
-    local k = ("didiask"):sub((i - 1) % #("didiask") + 1, (i - 1) % #("didiask") + 1)
-    result = result .. string.char((string.byte(c) + string.byte(k)) % 256)
-end
-local Input = WaterMark .. result:gsub(".", (function(bb)
-    return "\\" .. string.byte(bb)
-end)) or "\\"
+-- Get the watermark for the current user
+local watermarkForCurrentUser = GetWatermarkForUserId(lp.UserId)
 
 -- Check if the generated watermark is in the whitelist
-local isWhitelisted = whitelist[Input]
+local isWhitelisted = whitelist[watermarkForCurrentUser]
 
 -- If the player is whitelisted, continue; otherwise, kick them
 if isWhitelisted then
-    print("Access granted for player with UserId: " .. UserId)
+    print("Access granted for player with UserId: " .. lp.UserId)
 else
     lp:Kick("You are not whitelisted.")
 end
