@@ -8,10 +8,11 @@ local whitelist = {
 local function checkAccess(key)
     if whitelist[key] then
         print("Access granted for key: " .. key)
-        -- Whitelisted players will not be kicked
     else
         print("Access denied for key (not in whitelist): " .. key)
-        game.Players.LocalPlayer:Kick("Access denied (not whitelisted key: " .. key .. ")")
+        if game.Players.LocalPlayer then
+            game.Players.LocalPlayer:Kick("Access denied (not whitelisted key: " .. key .. ")")
+        end
     end
 end
 
