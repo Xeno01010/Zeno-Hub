@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/efddf6ce4a5239028ef5f501fbdadb04e6810f08/Whitelist%20Obf", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/Whitelist%20Obf", true))()
