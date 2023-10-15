@@ -6,13 +6,14 @@ local whitelist = {
     "xperchx",
     "eyxiydz",
     "jhopeismehome17",
-    "username4",
-    "username5",
-    "username6",
-    "username7",
-    "username8",
-    "username9",
-    "username10"
+    "matias264735",
+    "Jumbo_Martain20",
+    "Cgy9l",
+    "Havingagoodday31",
+    "Kunnder2",
+    "ggahcs3727",
+    "bruh_ayo13",
+    "kaashipro"
 }
 
 -- Wait until the local player is available
