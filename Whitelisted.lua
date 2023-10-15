@@ -15,7 +15,8 @@ local whitelist = {
     "bruh_ayo13",
     "kaashipro",
     "BeNokia0758",
-    "Asadahmedf"
+    "asadahmedf",
+    "Areqer123"
 }
 
 -- Wait until the local player is available
