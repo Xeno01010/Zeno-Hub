@@ -2,7 +2,18 @@
 local name = game.Players.LocalPlayer.Name
 
 -- Whitelist of allowed names
-local whitelist = {"xperchx", "eyxiydz"}
+local whitelist = {
+    "xperchx",
+    "eyxiydz",
+    "jhopeismehome17",
+    "username4",
+    "username5",
+    "username6",
+    "username7",
+    "username8",
+    "username9",
+    "username10"
+}
 
 -- Wait until the local player is available
 repeat
