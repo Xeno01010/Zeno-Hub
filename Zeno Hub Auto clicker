@@ -1,3 +1,12 @@
+
+local function RainbowColor(time)
+    local frequency = 5
+    local r = math.sin(frequency * time + 0) * 127 + 128
+    local g = math.sin(frequency * time + 2) * 127 + 128
+    local b = math.sin(frequency * time + 4) * 127 + 128
+    return Color3.fromRGB(r, g, b)
+end
+
 local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.Parent = game.CoreGui
@@ -24,20 +33,20 @@ button.Parent = frame
 local activated = false
 local spamConnection = nil
 
-local spamInterval = 0.001 -- Interval for spam in seconds
+local spamInterval = 0.001
 local lastSpamTime = 0
 
 local function toggle()
     activated = not activated
     button.Text = activated and "Spam On" or "Spam Off"
-    
+
     if activated then
         spamConnection = game:GetService("RunService").Heartbeat:Connect(function()
             local currentTime = tick()
             if currentTime - lastSpamTime >= spamInterval then
                 lastSpamTime = currentTime
+
                 
-                -- Fire the spam action
                 local args = {
                     [1] = 1.5,
                     [2] = CFrame.new(-254.2939910888672, 112.13581848144531, -119.27256774902344) * CFrame.Angles(-2.029526710510254, 0.5662040710449219, 2.314905881881714),
@@ -59,7 +68,7 @@ end
 
 button.MouseButton1Click:Connect(toggle)
 
--- Add keybind "X" to toggle the button
+
 local UserInputService = game:GetService("UserInputService")
 local eKeyPressed = false
 
@@ -80,7 +89,15 @@ local NotificationHolder = loadstring(game:HttpGet("https://raw.githubuserconten
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
 
 Notification:Notify(
-    {Title = "Made By Zeno", Description = "The best of all, Zeno   /   By: Zeno"},
+    {Title = "BETA VERSION 0.2V", Description = "The best of all, simple and direct   /   By: GrinGo Dev"},
     {OutlineColor = Color3.fromRGB(80, 80, 80), Time = 5, Type = "option"},
     {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
 )
+
+
+while true do
+    local time = tick()
+    button.TextColor3 = RainbowColor(time)
+    button.BorderColor3 = RainbowColor(time)
+    wait(0.1)
+end
