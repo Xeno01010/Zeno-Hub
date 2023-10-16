@@ -1,0 +1,73 @@
+-- ... (existing code)
+
+-- Function to apply rainbow effect to the text color
+local function applyRainbowEffect(textLabel)
+    while true do
+        for i = 0, 1, 0.01 do
+            textLabel.TextColor3 = Color3.fromHSV(i, 1, 1)
+            wait(0.1)  -- Adjust the speed of the rainbow effect by changing the wait time
+        end
+    end
+end
+
+function ElementHandler:Label(text)
+    -- ... (existing code)
+
+    -- Apply rainbow effect to the label's text color
+    local textLabel = label:FindFirstChild("textLabel")
+    spawn(function()
+        applyRainbowEffect(textLabel)
+    end)
+
+    return label
+end
+
+function ElementHandler:Button(text, callback)
+    -- ... (existing code)
+
+    -- Apply rainbow effect to the button's text color
+    local textLabel5 = button:FindFirstChild("textLabel5")
+    spawn(function()
+        applyRainbowEffect(textLabel5)
+    end)
+
+    return button
+end
+
+function ElementHandler:Slider(text, default, min, max, callback)
+    -- ... (existing code)
+
+    -- Apply rainbow effect to the slider text color
+    local textLabel1 = slider:FindFirstChild("textLabel1")
+    spawn(function()
+        applyRainbowEffect(textLabel1)
+    end)
+
+    return slider
+end
+
+function ElementHandler:Toggle(text, callback)
+    -- ... (existing code)
+
+    -- Apply rainbow effect to the toggle text color
+    local textLabel4 = toggle1:FindFirstChild("textLabel4")
+    spawn(function()
+        applyRainbowEffect(textLabel4)
+    end)
+
+    return toggle1
+end
+
+function ElementHandler:Textbox(text, callback)
+    -- ... (existing code)
+
+    -- Apply rainbow effect to the textbox text color
+    local textLabel6 = textbox:FindFirstChild("textLabel6")
+    spawn(function()
+        applyRainbowEffect(textLabel6)
+    end)
+
+    return textbox
+end
+
+return Library
