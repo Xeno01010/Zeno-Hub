@@ -16,7 +16,9 @@ local whitelist = {
     "kaashipro",
     "BeNokia0758",
     "asadahmedf",
-    "Areqer123"
+    "Areqer123",
+    "Axepls12345",
+    "BimbiButDiff"
 }
 
 -- Wait until the local player is available
