@@ -1,8 +1,8 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "ZS Paid V0.11", HidePremium = true, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "ZS Paid V1.11", HidePremium = true, SaveConfig = true, ConfigFolder = "OrionTest"})
 OrionLib:MakeNotification({
 	Name = "Made By Semaj",
-	Content = "ZS Paid V0.11",
+	Content = "ZS Paid V1.11",
 	Image = "rbxassetid://4483345998",
 	Time = 20
 })
