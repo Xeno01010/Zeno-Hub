@@ -1,31 +1,23 @@
--- Function to calculate rainbow colors
-local function calculateRainbowColor(position)
-    local frequency = 0.05  -- Adjust this value to control the speed of the rainbow
-    local r = math.sin(frequency * position + 0) * 127 + 128
-    local g = math.sin(frequency * position + 2) * 127 + 128
-    local b = math.sin(frequency * position + 4) * 127 + 128
+-- Previous code ...
+
+local function RainbowColor(time)
+    local frequency = 3
+    local r = math.sin(frequency * time + 0) * 127 + 128
+    local g = math.sin(frequency * time + 2) * 127 + 128
+    local b = math.sin(frequency * time + 4) * 127 + 128
     return Color3.fromRGB(r, g, b)
 end
 
--- Modify the colors of UI elements to create a rainbow effect
-RunService.RenderStepped:Connect(function()
-    local time = tick()
+-- Modify theme colors for rainbow effect
+local currentTime = tick()
+OrionLib.Themes.Default.Main = RainbowColor(currentTime)
+OrionLib.Themes.Default.Second = RainbowColor(currentTime + 0.1)
+OrionLib.Themes.Default.Stroke = RainbowColor(currentTime + 0.2)
+OrionLib.Themes.Default.Divider = RainbowColor(currentTime + 0.3)
+OrionLib.Themes.Default.Text = Color3.fromRGB(240, 240, 240)
+OrionLib.Themes.Default.TextDark = Color3.fromRGB(150, 150, 150)
 
-    -- Modify the colors of UI elements using the rainbow effect
-    title.TextColor3 = calculateRainbowColor(time)
-    main.BackgroundColor3 = calculateRainbowColor(time)
-    tabContainer.BackgroundColor3 = calculateRainbowColor(time)
-    
-    -- Modify other elements similarly, adjusting the position value for a different effect
-    -- For example:
-    -- container.BackgroundColor3 = calculateRainbowColor(time * 0.5)
-
-    -- ...
-end)
-
--- Rest of the script remains unchanged
-
--- ...
+-- Rest of the code ...
 
 
 local UserInputService = game:GetService("UserInputService")
