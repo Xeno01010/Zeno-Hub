@@ -201,7 +201,7 @@ Tab:AddButton({
 	Name = "AutoClicker Spam Button",
 	Callback = function()
       		print("button pressed")
-      loadstring(game:HttpGet('https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/Zeno%20Hub%20Auto%20clicker'))()
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/Solar%20Auto%20clicker'))()
   	end    
 })
 
