@@ -1,0 +1,55 @@
+local function RainbowColor(time)
+            local frequency = 3
+            local r = math.sin(frequency * time + 0) * 127 + 128
+            local g = math.sin(frequency * time + 2) * 127 + 128
+            local b = math.sin(frequency * time + 4) * 127 + 128
+            return Color3.fromRGB(r, g, b)
+        end
+
+        local DepthMode = "AlwaysOnTop"
+        local FillTransparency = 0.5
+        local OutlineColor = Color3.fromRGB(255, 255, 255)
+        local OutlineTransparency = 0
+
+        local CoreGui = game:GetService("CoreGui")
+        local Players = game:GetService("Players")
+        local lp = Players.LocalPlayer
+        local connections = {}
+
+        local Storage = Instance.new("Folder")
+        Storage.Parent = CoreGui
+        Storage.Name = "Highlight_Storage"
+
+        local function Highlight(plr)
+            local Highlight = Instance.new("Highlight")
+            Highlight.Name = plr.Name
+            Highlight.DepthMode = DepthMode
+            Highlight.FillTransparency = FillTransparency
+            Highlight.OutlineColor = OutlineColor
+            Highlight.OutlineTransparency = OutlineTransparency
+            Highlight.Parent = Storage
+
+            local plrchar = plr.Character
+            if plrchar then
+                Highlight.Adornee = plrchar
+            end
+
+            connections[plr] = plr.CharacterAdded:Connect(function(char)
+                Highlight.Adornee = char
+            end)
+        end
+
+        Players.PlayerAdded:Connect(Highlight)
+        for i, v in pairs(Players:GetPlayers()) do
+            Highlight(v)
+        end
+
+        while true do
+            local time = tick()
+            for _, highlight in pairs(Storage:GetChildren()) do
+                if highlight:IsA("Highlight") then
+                    highlight.FillColor = RainbowColor(time)
+                end
+            end
+            wait(0.1)
+        end
