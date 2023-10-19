@@ -1,4 +1,10 @@
-
+local function RainbowColor(time)
+    local frequency = 5
+    local r = math.sin(frequency * time + 0) * 127 + 128
+    local g = math.sin(frequency * time + 2) * 127 + 128
+    local b = math.sin(frequency * time + 4) * 127 + 128
+    return Color3.fromRGB(r, g, b)
+end
 
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -1764,3 +1770,11 @@ function OrionLib:Destroy()
 end
 
 return OrionLib
+
+
+while true do
+    local time = tick()
+    button.TextColor3 = RainbowColor(time)
+    button.BorderColor3 = RainbowColor(time)
+    wait(0.1)
+end
