@@ -27,7 +27,7 @@ button.BorderColor3 = Color3.new(0, 0, 25)
 button.BorderSizePixel = 2
 button.Font = Enum.Font.SourceSans
 button.TextColor3 = Color3.new(150, 0, 0)
-button.TextSize = 18
+button.TextSize = 19
 button.Parent = frame
 
 local activated = false
