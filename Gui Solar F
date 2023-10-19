@@ -7,34 +7,11 @@ local window = DrRayLibrary:Load("SolarZ V1", "Default")
 local tab = DrRayLibrary.newTab("Cheats", "ImageIdHere")
 
 tab.newButton("Auto Parry V1", "Beta", function()
-             getgenv().ScriptConfig = {
-    -- Distance in stud before the automatic triggers,
-    -- you may change even after you have ran the script if you desire!
-    -- Just be sure to REMOVE the loadstring, or else you will face some... issues
-    DistanceBeforeParry = 29,
-}
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sussy-Tech/Scripts/main/BladeBall.lua"))()
+   
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/AutoBlock"))()
 
     print('Hello!')
 end)
-
-
-tab.newButton("Auto Parry V2", "I Recommend this", function()
-    getgenv().config = getgenv().config or {
-    hit_time = 0.36, -- // recommended 0.25 to 0.75 \ --
-
-    mode = 'Always', -- // Hold , Toggle , Always \ --
-    deflect_type = 'Remote', -- // Key Press , Remote \ --
-    notifications = true,
-    keybind = Enum.KeyCode.V
-}
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3ABlade%20Ball%20Parry%20V4.0.0",true))()
-    print('Hello!')
-end)
-
-
 
 tab.newButton("Spam Button", "AutoClicker", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/Solar%20Auto%20clicker'))()
