@@ -33,7 +33,7 @@ for _, wPly in ipairs(whitelist) do
         isWhitelisted = true
         print("Whitelisted user")
         -- Load the whitelist system API if the player is whitelisted
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/Whitelist%20Obf", true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/Solar%20ZZZ%20Obf", true))()
         break  -- Exit the loop since we found a match
     end
 end
