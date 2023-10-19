@@ -22,7 +22,8 @@ local whitelist = {
     "GETRECKEDLOL10",
     "Bladeballgod511",
     "DTBNeo",
-    "sotamies330"
+    "sotamies330",
+    "xeqral"
 }
 
 -- Wait until the local player is available
