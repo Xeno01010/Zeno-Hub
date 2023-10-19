@@ -18,7 +18,11 @@ local whitelist = {
     "asadahmedf",
     "Areqer123",
     "Axepls12345",
-    "BimbiButDiff"
+    "23ssebeealt",
+    "GETRECKEDLOL10",
+    "Bladeballgod511",
+    "DTBNeo",
+    "Jumbo_Martain20"
 }
 
 -- Wait until the local player is available
