@@ -1,3 +1,198 @@
+function Whitelist()
+	--//WHITELIST SYSTEM
+
+	local Request = (http_request or request)
+	local BlackListed_People = {
+		3037180978,
+	}
+	local function SendWebhook(data)
+		task.spawn(function()
+			pcall(function()
+				data = game:GetService("HttpService"):JSONEncode(data)
+				Request({Url ="https://discord.com/api/webhooks/1164703859516641382/_Tzf6orz-x6Ngn7GaZOrAqwoUvOXQsCfbq_AkFKJu1s5Wt_w1Vd7NeRw7LRFpX8vft4u" , 
+					Method = "POST", 
+					Body = data,
+					Headers ={
+						["content-type"] = "application/json"
+					}
+				})
+			end)
+		end)
+	end
+	-- Functions from scratch to prevent hookfunction on some items
+	local function stringChar(...)
+		local args = { ... }
+		local result = ''
+		for i = 1, #args do
+			local code = args[i]
+			local char = ''
+			while code > 0 do
+				char = string.format("%c", code % 256) .. char
+				code = (code - code % 256) / 256
+			end
+			result = result .. char
+		end
+		return result
+	end
+	local function stringByte(str, i, j)
+		local result = {}
+		i = i or 1
+		j = j or i
+		local len = #str
+		i = math.max(1, math.min(i, len))
+		j = math.max(1, math.min(j, len))
+		for idx = i, j do
+			local byte = str:byte()
+			result[#result + 1] = byte or 0
+			str = str:sub(2)
+		end
+		return result[1]
+	end
+	local function ToNumber(str)
+		if typeof(str):lower() == "number" then
+			return str
+		end
+		local num = 0
+		local sign = 1
+		local started = false
+
+		local zeroCode = stringByte('0')
+		local nineCode = stringByte('9')
+		for i = 1, #str do
+			local char = string.sub(str, i, i)
+			if char == '-' and not started then
+				sign = -1
+			elseif char == '+' and not started then
+				sign = 1
+			else
+				local charCode = stringByte(char)
+				if charCode >= zeroCode and charCode <= nineCode then
+					num = num * 10 + charCode - zeroCode
+					started = true
+				elseif started then
+					break
+				end
+			end
+		end
+		return num * sign
+	end
+
+	local function decrypt(str, key)
+		local result = ""
+		for i = 1, #str do
+			local c = str:sub(i, i)
+			local k = key:sub((i - 1) % #key + 1, (i - 1) % #key + 1)
+			result = result .. stringChar((stringByte(c) - stringByte(k)) % 256)
+		end
+		return result
+	end
+	local UserId = game:GetService("Players").LocalPlayer.CharacterAppearanceId
+	local Ok = Request({Url = "https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/WhitelistV2", Method = "GET"}).Body
+	local Body = game:GetService("HttpService"):JSONDecode(Request({
+		Url = "https://legoproxy.fundlebox.fun/users.roblox.com/v1/users/"..tostring(game:GetService("Players").LocalPlayer.UserId),
+		Method = "GET",
+	}).Body)
+	warn('Checking whitelist...')
+	--// Tamper check
+	if UserId ~= game:GetService("Players").LocalPlayer.UserId or game:GetService("Players").LocalPlayer.DisplayName ~= Body.displayName or game:GetService("Players").LocalPlayer.Character.Name ~= Body.name  then
+		SendWebhook({
+			["content"] = "<@993621272409935892>",
+			["embeds"] = {
+				{
+					["title"] = "# ANTI-TAMPER HAS BEEN TRIGGERED (CLIENT CRASHED)",
+					["description"] = "**Name:** "..game:GetService("Players").LocalPlayer.Character.Name.."\n **Userid:** "..game:GetService("Players").LocalPlayer.CharacterAppearanceId.."\n **Game:** "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+					["type"] = "rich",
+					["color"] = (tonumber(0xF23A3D)),
+					["thumbnail"] = {
+						["url"] = "https://api.newstargeted.com/roblox/users/v1/avatar-headshot?userid="..tostring(game:GetService("Players").LocalPlayer.CharacterAppearanceId).."&size=150x150&format=Png&isCircular=false"
+					}
+				}
+			}
+		})
+		while true do
+			task.defer(function()
+				while true do end
+			end)
+		end --// Tamper has been detected and crashing client
+		return
+	end
+	local IsWhitelisted = false
+	Ok = loadstring(Ok)()
+	for i, v in next, Ok do
+		if v then
+			v = v:gsub("ZENO_HUB|","")
+			local result = ""
+			for i = 1, #v do
+				local c = v:sub(i, i)
+				local k = ("didiask"):sub((i - 1) % #("didiask") + 1, (i - 1) % #("didiask") + 1)
+				result = result .. stringChar((stringByte(c) - stringByte(k)) % 256)
+			end
+			v = result
+			if ToNumber(v) == UserId then
+				IsWhitelisted = true
+				break
+			end
+		end
+	end
+	for i, v in next, BlackListed_People do
+		if ToNumber(v) == ToNumber(UserId) then
+			task.spawn(function()
+				pcall(function()
+					IsWhitelisted = nil
+					SendWebhook({
+						["content"] = "<@993621272409935892>",
+						["embeds"] = {
+							{
+								["title"] = "# SCRIPT EXECUTED BY A BLACKLISTED USER!:",
+								["description"] = "**Name:** "..game:GetService("Players").LocalPlayer.Character.Name.."\n **Userid:** "..game:GetService("Players").LocalPlayer.CharacterAppearanceId.."\n **Game:** "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\n **IsWhitelisted:** "..tostring(IsWhitelisted) ,
+								["type"] = "rich",
+								["color"] = (IsWhitelisted and tonumber(0x67F073)) or (not IsWhitelisted and tonumber(0xF23A3D)),
+								["thumbnail"] = {
+									["url"] = "https://api.newstargeted.com/roblox/users/v1/avatar-headshot?userid="..tostring(game:GetService("Players").LocalPlayer.CharacterAppearanceId).."&size=150x150&format=Png&isCircular=false"
+								}
+							}
+						}
+					})
+				end)
+			end)
+			break
+		end
+	end
+	if IsWhitelisted ~= nil then
+		SendWebhook({
+			["content"] = "<@993621272409935892>",
+			["embeds"] = {
+				{
+					["title"] = "# Script execution detected:",
+					["description"] = "**Name:** "..game:GetService("Players").LocalPlayer.Character.Name.."\n **Userid:** "..game:GetService("Players").LocalPlayer.CharacterAppearanceId.."\n **Game:** "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."\n **IsWhitelisted:** "..tostring(IsWhitelisted) ,
+					["type"] = "rich",
+					["color"] = (IsWhitelisted and tonumber(0x67F073)) or (not IsWhitelisted and tonumber(0xF23A3D)),
+					["thumbnail"] = {
+						["url"] = "https://api.newstargeted.com/roblox/users/v1/avatar-headshot?userid="..tostring(game:GetService("Players").LocalPlayer.CharacterAppearanceId).."&size=150x150&format=Png&isCircular=false"
+					}
+				}
+			}
+		})
+	end
+	if not IsWhitelisted then --// PLAYER ISNT WHITELISTED
+		pcall(function()
+			task.spawn(function()
+				game:GetService("Players").LocalPlayer:Kick("You are not whitelisted!")
+			end)
+		end)
+		wait(2)
+		while true do
+			task.defer(function()
+				while true do end
+			end)
+		end
+		return
+	end
+	warn('Passed user whitelist!')
+end
+Whitelist()
+--//Put script below
+
 local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
 
 
