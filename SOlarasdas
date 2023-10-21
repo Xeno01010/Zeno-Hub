@@ -1,0 +1,47 @@
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+
+
+local window = DrRayLibrary:Load("SolarZ V1", "Default")
+
+
+local tab = DrRayLibrary.newTab("Cheats", "ImageIdHere")
+
+local function autoParry()
+    getgenv().config = getgenv().config or {
+        hit_time = 0.38, -- Recommended 0.25 to 0.75
+        mode = 'Always', -- Hold, Toggle, Always
+        deflect_type = 'Remote', -- Key Press, Remote
+        notifications = true,
+        keybind = Enum.KeyCode.V
+    }
+    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3ABlade%20Ball%20Parry%20V4.0.0", true))()
+end
+
+tab.newButton("Auto Parry", "Beta", autoParry)
+
+
+tab.newButton("Auto Parry V2", "good for pc", function()
+   
+loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/AutoBlock"))()
+
+    print('Hello!')
+end)
+
+tab.newButton("Spam Button", "AutoClicker", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/Solar%20Auto%20clicker'))()
+  print('Hello!')
+end)
+
+
+local tab = DrRayLibrary.newTab("Misc.", "ImageIdHere")
+
+tab.newButton("ESP", "Cool", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xeno01010/Zeno-Hub/main/HightLighttasdfa"))()
+    print('Hello!')
+end)
+
+tab.newButton("Mobile Keyboard", "Keyboard but on mobile XD", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt"))()
+    print('Hello!')
+end)
